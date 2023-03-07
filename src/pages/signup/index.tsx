@@ -5,6 +5,7 @@ import styles from '../../styles/home.module.scss';
 import logoImg from '../../../public/logo.svg';
 import { Input } from '../../components/ui/Input'
 import { Button } from '../../components/ui/Button'
+import { toast } from 'react-toastify';
 
 import Link from 'next/link';
 import { AuthContext } from '@/contexts/AuthContext';
@@ -19,7 +20,7 @@ export default function SignUp() {
   async function handleSignUp(event: FormEvent) {
     event.preventDefault();
     if (name===''||email===''||password==='') {
-      alert('Preencha os dados')
+      toast.warning('Preencha todos os dados')
       return
     }
     setLoading(true)

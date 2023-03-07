@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image';
-import styles from '../../styles/home.module.scss';
-import logoImg from '../../../public/logo.svg';
+import { canSSRAuth } from '@/utils/canSSRAuth';
+import { Header } from '../../components/Header'
+
 
 
 import Link from 'next/link';
@@ -10,18 +10,19 @@ export default function dashboard() {
   return (
     <>
       <Head>
-        <title>dashboard</title>
+        <title>Painel - Sujeito Pizzaria</title>
       </Head>
-      <div className={styles.containerCenter}>
-        <Image src={logoImg} alt="Logo Sujeito Pizzaria" />
-        <div className={styles.login}>
-          <h1>Bem-vindo!</h1>
-          <form>
-           
-          </form>
-          
-        </div>
+      <Header />
+      <div>
+        <h1>Painel</h1>
       </div>
     </>
   )
 }
+export const getServerSideProps = canSSRAuth( async (ctx) => {
+  return{
+    props: {
+      
+    }
+  }
+})

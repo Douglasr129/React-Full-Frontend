@@ -3,10 +3,12 @@ import Head from 'next/head'
 import Image from 'next/image';
 import styles from '@/styles/home.module.scss';
 import logoImg from '../../public/logo.svg';
-import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
-import { AuthContext } from '../contexts/AuthContext'
+import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/Button'
+import { AuthContext } from '@/contexts/AuthContext'
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { canSSRGuest } from '@/utils/canSSRGuest';
 
 export default function Home() {
   const { signIn } = useContext(AuthContext)
@@ -17,7 +19,7 @@ export default function Home() {
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
     if (email ===''|| password==='') {
-      alert('Preencha os dados')
+      toast.warning('Preencha todos os dados')
       return
     }
     setLoading(true)
@@ -49,3 +51,11 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest( async (ctx) => {
+  return{
+    props: {
+      
+    }
+  }
+})
